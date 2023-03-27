@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_post
+  before_action :set_comment, only: [:edit, :update]
 
   def index
     @comments = @post.comments
@@ -18,10 +19,26 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
+  def update
+    if @comment.update(params_comment)
+      redirect_to post_comments_path(@post)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_post
     @post = Post.find(params[:post_id])
+  end
+
+  def set_comment
+    @comment = @post.comments.find(params[:id])
   end
 
   def params_comment
