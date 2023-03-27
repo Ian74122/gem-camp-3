@@ -10,7 +10,7 @@
     <tr>
       <td><%= post.title %></td>
       <td><%= post.content %></td>
-      <td></td>
+      <td><%= link_to :edit, edit_post_path(post)%></td>
     </tr>
   <% end %>
 </table>
