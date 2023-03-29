@@ -3,11 +3,15 @@
 <ul>
   <% @comments.each do |comment| %>
     <li>
+      <%= current_user.email %>:
       <%= comment.content %>(<%= comment.created_at %>)
-      <%= link_to :edit, edit_post_comment_path(@post, comment), class: 'btn btn-info' %>
-      <%= button_to :delete, post_comment_path(@post, comment), method: :delete, class: 'btn btn-danger' %>
+      <% if user_signed_in? && comment.user == current_user %>
+        <%= link_to :edit, edit_post_comment_path(@post, comment), class: 'btn btn-info' %>
+        <%= button_to :delete, post_comment_path(@post, comment), method: :delete, class: 'btn btn-danger' %>
+      <% end %>
     </li>
   <% end %>
 </ul>
 
+<%= link_to 'new comment', new_post_comment_path(@post), class: 'btn btn-info' %>
 <%= link_to 'Post List', posts_path, class: 'btn btn-primary' %>
