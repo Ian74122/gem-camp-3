@@ -15,9 +15,9 @@
       <td><%= post.title %></td>
       <td><%= post.content %></td>
       <td>
-        <%= link_to :edit, edit_post_path(post), class: 'btn btn-success' %>
+        <%= link_to :edit, edit_post_path(post), class: 'btn btn-success' if user_signed_in? && post.user == current_user %>
         <%= link_to :show, post_path(post), class: 'btn btn-info' %>
-        <%= button_to :delete, post_path(post), method: :delete, class: 'btn btn-danger' %>
+        <%= button_to :delete, post_path(post), method: :delete, class: 'btn btn-danger'  if user_signed_in? && post.user == current_user %>
         <%= link_to :comments, post_comments_path(post), class: 'btn btn-dark' %>
         <%= link_to 'New Comment', new_post_comment_path(post), class: 'btn btn-light' %>
       </td>
