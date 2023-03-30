@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.xml { render xml: @posts.as_json }
       format.csv {
         csv_string = CSV.generate do |csv|
           csv << [
