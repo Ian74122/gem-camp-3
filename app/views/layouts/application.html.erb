@@ -13,11 +13,13 @@
   <body>
     <div class="container">
       <% if user_signed_in? %>
-        <h2> Hello <%= current_user.email %> </h2>
+        <h2> <%= t( 'hello', name: current_user.email) if current_user %> </h2>
         <%= link_to 'Sign out', destroy_user_session_path, data: { 'turbo-method': :delete } %>
       <% else %>
         <%= link_to 'Sign in', new_user_session_path %>
       <% end %>
+      <%= link_to "EN", params.permit!.merge(locale: 'en') %>
+      <%= link_to "zh-CN", params.permit!.merge(locale: 'zh-CN') %>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
       <%= yield %>

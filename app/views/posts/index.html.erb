@@ -1,12 +1,12 @@
-<h1>Post List</h1>
+<h1><%= t('post_list') %></h1>
 
 <table class="table table-striped table-hover">
   <thead>
   <td>email</td>
   <td>category</td>
-  <td>title</td>
-  <td>content</td>
-  <td>count of comments</td>
+  <td><%= Post.human_attribute_name(:title) %></td>
+  <td><%= Post.human_attribute_name(:content) %></td>
+  <td><%= Post.human_attribute_name(:comments_count) %></td>
   <td>action</td>
   </thead>
   <% @posts.each do |post| %>
