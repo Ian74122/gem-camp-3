@@ -7,6 +7,7 @@
   <td><%= Post.human_attribute_name(:title) %></td>
   <td><%= Post.human_attribute_name(:content) %></td>
   <td><%= Post.human_attribute_name(:comments_count) %></td>
+  <td><%= Post.human_attribute_name(:image) %></td>
   <td>action</td>
   </thead>
   <% @posts.each do |post| %>
@@ -16,6 +17,7 @@
       <td><%= post.title %></td>
       <td><%= post.content %></td>
       <td><%= post.comments_count %></td>
+      <td><%= image_tag post.image.url if post.image.present? %></td>
       <td>
         <%= link_to :edit, edit_post_path(post), class: 'btn btn-success' if user_signed_in? && post.user == current_user %>
         <%= link_to :show, post_path(post), class: 'btn btn-info' %>
