@@ -10,11 +10,6 @@ class PhLocationService
     data = JSON.parse(request.body)
     data.each do |region|
       address_region = Address::Region.find_or_initialize_by(code: region['code'])
-      if address_region.new_record?
-        puts 'New'
-      else
-        puts "update record id is #{address_region.id}"
-      end
       address_region.name = region['regionName']
       address_region.save
     end
