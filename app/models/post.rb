@@ -10,6 +10,10 @@ class Post < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
+  scope :recent, -> { order(created_at: :desc) }
+  scope :today, -> { where('created_at >= ?', Time.current.beginning_of_day) }
+
+  delegate :email, to: :user, prefix: :user
   def destroy
     update(deleted_at: Time.now)
   end
