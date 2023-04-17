@@ -36,6 +36,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    SampleJob.perform_later
     @post.user = current_user
     if @post.save
       redirect_to posts_path
