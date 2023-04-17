@@ -4,29 +4,34 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root 'posts#index'
+  constraints(ClientDomainConstraint.new) do
+    root 'posts#index'
 
-  resources :posts do
-    resources :comments, except: :show
-  end
-  resources :categories
+    resources :posts do
+      resources :comments, except: :show
+    end
+    resources :categories
 
-  namespace :api do
-    namespace :v1 do
-      resources :regions, only: %i[index show], defaults: { format: :json } do
-        resources :provinces, only: :index, defaults: { format: :json }
+    namespace :api do
+      namespace :v1 do
+        resources :regions, only: %i[index show], defaults: { format: :json } do
+          resources :provinces, only: :index, defaults: { format: :json }
+        end
+        resources :provinces, only: %i[index show], defaults: { format: :json } do
+          resources :cities, only: :index, defaults: { format: :json }
+        end
+        resources :cities, only: %i[index show], defaults: { format: :json } do
+          resources :barangays, only: :index, defaults: { format: :json }
+        end
+        resources :barangays, only: %i[index show], defaults: { format: :json }
       end
-      resources :provinces, only: %i[index show], defaults: { format: :json } do
-        resources :cities, only: :index, defaults: { format: :json }
-      end
-      resources :cities, only: %i[index show], defaults: { format: :json } do
-        resources :barangays, only: :index, defaults: { format: :json }
-      end
-      resources :barangays, only: %i[index show], defaults: { format: :json }
     end
   end
 
-  namespace :admin do
-    resources :users, only: :index
+  constraints(AdminDomainConstraint.new) do
+    namespace :admin do
+      root 'users#index'
+      resources :users, only: :index
+    end
   end
 end
