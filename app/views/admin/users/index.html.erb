@@ -1,0 +1,22 @@
+<h1>User List</h1>
+
+<table>
+  <thead>
+  <tr>
+    <td>id</td>
+    <td>email</td>
+    <td>last sign in at</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.email %></td>
+      <td><%= user.last_sign_in_at %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @users %>
