@@ -3,3 +3,4 @@ en:
     default: You are not authorized to perform this action
     post_policy:
       edit?: You are not this post owner
+      today?: You only can edit the post you created in one day

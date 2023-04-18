@@ -10,4 +10,8 @@ class PostPolicy < ApplicationPolicy
   def destroy?
     record.user == user
   end
+
+  def today?
+    record.created_at.to_date == Date.current
+  end
 end

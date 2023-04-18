@@ -52,6 +52,7 @@ class PostsController < ApplicationController
 
   def update
     authorize @post, :update?, policy_class: PostPolicy
+    authorize @post, :today?, policy_class: PostPolicy
     if @post.update(post_params)
       redirect_to posts_path
     else
