@@ -35,3 +35,4 @@
 
 /node_modules
 
+/lib/GeoLite2-Country.mmdb
