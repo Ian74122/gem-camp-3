@@ -7,6 +7,7 @@
   <td><%= Post.human_attribute_name(:title) %></td>
   <td><%= Post.human_attribute_name(:content) %></td>
   <td><%= Post.human_attribute_name(:comments_count) %></td>
+  <td><%= Post.human_attribute_name(:location) %></td>
   <td><%= Post.human_attribute_name(:image) %></td>
   <td><%= Post.human_attribute_name(:created_at) %></td>
   <td>action</td>
@@ -18,6 +19,7 @@
       <td><%= post.title %></td>
       <td><%= post.content %></td>
       <td><%= post.comments_count %></td>
+      <td><%= Geocoder.search(post.ip_address).first&.country %></td>
       <td><%= image_tag post.image.url if post.image.present? %></td>
       <td><%= post.created_at  %></td>
       <td>

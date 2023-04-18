@@ -37,6 +37,11 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     SampleJob.perform_later
     @post.user = current_user
+    if Rails.env.development?
+      @post.ip_address = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+    else
+      @post.ip_address = request.remote_ip
+    end
     if @post.save
       redirect_to posts_path
     else
