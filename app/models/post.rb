@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  audited
   default_scope { where(deleted_at: nil) }
   validates :title, presence: true
   validates :content, presence: true
