@@ -1,0 +1,22 @@
+<h1>Order List</h1>
+
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <td>serial number</td>
+    <td>amount</td>
+    <td>state</td>
+    <td>action</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+    <td><%= order.serial_number %></td>
+    <td><%= order.amount %></td>
+    <td><%= order.state %></td>
+    <td></td>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @orders %>

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       resources :comments, except: :show
     end
     resources :categories
-
+    resources :orders
     namespace :api do
       namespace :v1 do
         resources :regions, only: %i[index show], defaults: { format: :json } do
