@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
   has_many :posts
   has_many :comments
+  has_many :orders
   enum genre: { client: 0, admin: 1 }
 
   validates :phone_number, phone: {
