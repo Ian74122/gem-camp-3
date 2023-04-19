@@ -21,7 +21,7 @@ class Order < ApplicationRecord
 
     event :revoke do
       transitions from: [:pending, :submitted], to: :revoked
-      transitions from: :paid, to: :revoked, after: :deduct_balance!
+      transitions from: :paid, to: :revoked, guard: :balance_enough?, success: :deduct_balance!
     end
   end
 
@@ -35,5 +35,9 @@ class Order < ApplicationRecord
 
   def deduct_balance!
     user.update(balance: user.balance - amount)
+  end
+
+  def balance_enough?
+    user.balance >= amount
   end
 end
