@@ -15,7 +15,7 @@
       <td><%= order.serial_number %></td>
       <td><%= order.amount %></td>
       <td><%= order.state %></td>
-      <td></td>
+      <td><%= button_to 'revoke', order_revoke_path(order), data: { turbo: false } if order.may_revoke? %></td>
     </tr>
   <% end %>
   </tbody>

@@ -19,4 +19,14 @@ class OrdersController < ApplicationController
     end
   end
 
+  def revoke
+    order = current_user.orders.find(params[:order_id])
+    if order.may_revoke?
+      order.revoke!
+      flash[:notice] = 'Order revoked'
+    else
+      flash[:notice] = "Order can't revoked"
+    end
+    redirect_to orders_path
+  end
 end
