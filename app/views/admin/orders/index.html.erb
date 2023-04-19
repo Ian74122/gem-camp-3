@@ -1,0 +1,32 @@
+<h1>Order List</h1>
+
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <td>email</td>
+    <td>serial number</td>
+    <td>amount</td>
+    <td>state</td>
+    <td>action</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.user.email %></td>
+      <td><%= order.serial_number %></td>
+      <td><%= order.amount %></td>
+      <td><%= order.state %></td>
+      <td>
+        <%= button_to 'submit', admin_order_submit_path(order), data: { turbo: false } if order.may_submit? %>
+        <%= button_to 'pay', admin_order_pay_path(order), data: { turbo: false } if order.may_pay? %>
+        <%= button_to 'revoke', admin_order_revoke_path(order), data: { turbo: false } if order.may_revoke? %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= paginate @orders %>
+
+<%= link_to 'New Order', new_order_path %>

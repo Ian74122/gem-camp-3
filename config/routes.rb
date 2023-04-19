@@ -34,6 +34,11 @@ Rails.application.routes.draw do
     namespace :admin do
       root 'users#index'
       resources :users, only: :index
+      resources :orders do
+        post :revoke
+        post :submit
+        post :pay
+      end
     end
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
