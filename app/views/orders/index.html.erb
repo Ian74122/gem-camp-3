@@ -11,12 +11,16 @@
   </thead>
   <tbody>
   <% @orders.each do |order| %>
-    <td><%= order.serial_number %></td>
-    <td><%= order.amount %></td>
-    <td><%= order.state %></td>
-    <td></td>
+    <tr>
+      <td><%= order.serial_number %></td>
+      <td><%= order.amount %></td>
+      <td><%= order.state %></td>
+      <td></td>
+    </tr>
   <% end %>
   </tbody>
 </table>
 
 <%= paginate @orders %>
+
+<%= link_to 'New Order', new_order_path %>

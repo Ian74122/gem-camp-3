@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   include AASM
   belongs_to :user
   after_create :assign_serial_number
+  validates :amount, presence: true
   aasm column: :state do
     state :pending, initial: true
     state :submitted, :paid, :failed, :revoked
